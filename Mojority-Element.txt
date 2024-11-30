@@ -1,0 +1,57 @@
+Question 1 = Majority Element(https://leetcode.com/problems/majority-element/submissions/?envType=study-plan-v2&envId=top-interview-150)
+
+# Brute force Approach
+
+code:-
+class Solution {
+    public int majorityElement(int[] nums) {
+       for(int i=0; i<nums.length; i++){
+        int count=0;
+        for(int j=0; j<nums.length;j++){
+            if(nums[i] == nums[j])
+            {count = count+1;}
+
+        }
+        if(count>(int)nums.length/2){
+            return nums[i];
+        }
+       }
+    
+        return 0;
+    }
+}
+
+# Second Approach to solve this question by using the HashMap
+
+#Third Approch(Moore's voting algorithm)
+--> In this approach we create a two variable candidate=0 and count=0
+--> [2, 2, 1, 1, 1, 2, 2]
+--> 2 , candidate = 2, count=1
+    2 , candidate = 2, count=2
+    1 , candidate = 2, count=1
+    1 , candidate = 2, count=0
+    1 , candidate = 1, count=1
+    2 , candidate = 1, count=0
+    2 , candidate = 2, count=1          #Loop end so return candidate
+    
+    
+#Code:-
+class Solution {
+    public int majorityElement(int[] nums) {
+        int count=0;
+        int candidate=0;
+        for(int i=0; i<nums.length; i++){
+            if(count == 0){
+                count=1;
+                candidate=nums[i];
+            }else if(candidate==nums[i]){
+                count=count+1;
+            }else{
+                count=count-1;
+            }
+        }
+        return candidate;
+    }
+}
+
+
