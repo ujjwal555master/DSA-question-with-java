@@ -1,7 +1,7 @@
 Finding Missing and Reapeating value in array (Easy level question)
 https://leetcode.com/problems/find-missing-and-repeated-values/submissions/
 
-question:- find missing and reapeating value in array 
+question:- find missing and reapeating value in array (take 7ms)
 input = [[1, 3], [2, 2]]
 output = [2, 4]
 2 is the repeating value and 4 is missing value
@@ -39,5 +39,62 @@ class Solution {
 }
 
 
-#method 2: by using only array
+#method 2: by using only array (take 1ms)
+we create a count array of size 1 to n^2+1
+ex :- [[4, 2], [2, 3]]
+    1.  count size = 2^2+1 = 5 = [0, 0, 0, 0, 0]
+    2.  ans = 2 = [0, 0]
+    3. start loop which count the every number occurence
+        first column
+        
+    class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        //initialization
+        int n = grid.length;
+        int m = grid[0].length;
+        int[] count = new int[n*m];
+        int[] ans = new int[2];
+
+        //count
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                count[grid[i][j]-1] = count[grid[i][j]-1]+1;
+            }
+        }
+        for(int i=0; i<n*m; i++){
+            if(count[i] == 2){
+                ans[0] = i+1;
+            }
+            if(count[i] == 0){
+                ans[1] = i+1;
+            }
+        }
+        return ans;
+
+    }
+}
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
