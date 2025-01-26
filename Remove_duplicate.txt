@@ -1,0 +1,46 @@
+Remove duplicte :- https://leetcode.com/problems/remove-duplicates-from-sorted-array/?envType=study-plan-v2&envId=top-interview-150
+
+Input: nums = [1,1,2]
+Output: 2, nums = [1,2,_]
+Explanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
+It does not matter what you leave beyond the returned k (hence they are underscores).
+
+
+#code 1:
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0) return 0;
+        int k = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != nums[k]) {
+                k++;
+                nums[k] = nums[j];
+            }
+        }
+        return k + 1;
+    }
+}
+
+
+#code 2:- 
+
+    static int removeDuplicates(int[] arr) {
+        
+        // To track seen elements
+        HashSet<Integer> s = new HashSet<>();
+        
+        // To maintain the new size of the array
+        int idx = 0;  
+
+        for (int i = 0; i < arr.length; i++) {
+            if (!s.contains(arr[i])) { 
+                s.add(arr[i]);  
+                arr[idx++] = arr[i];  
+            }
+        }
+
+        // Return the size of the array 
+        // with unique elements
+        return idx;
+    }
