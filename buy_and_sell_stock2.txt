@@ -1,0 +1,47 @@
+Question 10 :- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/?envType=study-plan-v2&envId=top-interview-150
+
+Input: prices = [7,1,5,3,6,4]
+Output: 7
+Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+Total profit is 4 + 3 = 7.
+
+
+[7, 1, 5, 3, 6, 4]
+--> 1-7 = -6 = 0
+--> 5-1 =  4 = 4
+--> 3-5 = -2 = 0
+--> 6-3 =  3 = 3
+--> 4-6 = -2 = 0
+-------------------
++             7
+-------------------
+
+code :- Take 1ms
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int total_profit = 0;
+        for(int i=1; i<prices.length; i++){
+            total_profit = total_profit + Math.max(0, prices[i]-prices[i-1]);
+        }  
+        return total_profit; 
+    }
+}
+
+
+
+code :- 2 take 0ms
+class Solution {
+    public int maxProfit(int[] prices) {
+        int total_prices = 0;
+
+        for(int i=1; i<prices.length; i++){
+            if(prices[i] > prices[i-1]){
+                total_prices = total_prices + (prices[i]-prices[i-1]);
+            }
+            
+        }
+        return total_prices;
+    }
+}

@@ -1,0 +1,82 @@
+Question 9 :- https://leetcode.com/problems/rotate-array/description/?envType=study-plan-v2&envId=top-interview-150
+
+Input: nums = [1,2,3,4,5,6,7], k = 3
+Output: [5,6,7,1,2,3,4]
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+
+
+code 1:- It's take O(n^2) in large input it's show error time limit exceeds
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int last;
+        for(int j=0; j<k; j++){
+            last = nums[nums.length-1];
+            for(int i=nums.length-1; i>0; i--){
+                nums[i] = nums[i-1];
+            }
+            nums[0] = last;
+        }
+        
+    }
+}
+
+
+code 2:- In this approach we use the circlary linked list concept. take 1ms
+use mod property = (i+k) mod length_of_array
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int[] array1 = new int[nums.length];
+
+        for(int i=0; i<nums.length; i++){
+            array1[(i+k)%nums.length] = nums[i];
+        }
+
+        for(int i=0; i<nums.length; i++){
+            nums[i] = array1[i];
+        }
+        
+    }
+}
+
+code 3 :- In this we use reverse approaches
+1 2 3 4 5 6 7          // Real array
+7 6 5 4 3 2 1         //Reverse an array
+7 6 | 5 4 3 2 1      // divde the part according to the k value
+6 7 | 1 2 3 4 5     //Reverse each part
+
+
+
+code 1:- 
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n;  // Handle cases where k is greater than n
+
+        // Reverse the whole array
+        reverse(nums, 0, n - 1);
+
+        // Reverse the first k elements
+        reverse(nums, 0, k - 1);
+
+        // Reverse the remaining elements
+        reverse(nums, k, n - 1);
+    }
+
+    // Helper function to reverse a portion of the array
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
+
+thsi is the code for which take 0ms to run optimize code 
