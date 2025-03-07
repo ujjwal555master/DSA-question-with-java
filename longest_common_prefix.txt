@@ -1,0 +1,54 @@
+link :- https://leetcode.com/problems/longest-common-prefix/
+
+
+
+Input: strs = ["flower","flow","flight"]
+Output: "fl"
+
+
+
+take 1 ms
+code :- import java.util.*;
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        Arrays.sort(strs);
+
+        int firstlen = strs[0].length();
+        int lastlen = strs[strs.length-1].length();
+
+        int len = Math.min(firstlen, lastlen);
+
+        int i=0;
+        while(i<len && strs[0].charAt(i)==strs[strs.length-1].charAt(i)){
+            i=i+1;
+        }
+
+        return strs[0].substring(0, i);
+
+    }
+}
+
+
+code 2: take 0ms to run
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        
+        String prefix = strs[0];
+        
+        for (int i = 1; i < strs.length; i++) {
+            while (strs[i].indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty()) {
+                    return "";
+                }
+            }
+        }
+        
+        return prefix;
+    }
+}
+
+
